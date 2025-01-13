@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Customer</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            background-color: #706866;
+            color: white;
+        }
+        .box{
+            margin-top: 50px;
+            max-width: 40vw;
+            padding: 20px;
+            border-radius: 5px;
+            background-color: #567d4b;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        input{
+            min-width: 25vw;
+            height: 30px;
+        }
+        .buttons{
+            display: flex;
+            justify-content: end;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <form method="post" action="add_customer">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="Name">Name</label>
+                <input type="text" class="form-control" id="Name" name="name" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="FatherName">Father Name</label>
+                <input type="text" class="form-control" id="FatherName" name="father_name" placeholder="Father Name">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone</label>
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone">
+            </div>
+            <div class="form-group">
+                <label for="Quantity">Quantity</label>
+                <input type="number" class="form-control" id="Quantity" name="quantity" placeholder="quantity">
+            </div>
+            <div class="form-group">
+                <label for="Taken_Date">Taken Date</label>
+                <input type="date" class="form-control" id="Taken_Date" name="taken_date" placeholder="Taken Date">
+            </div>
+            <div class="form-group">
+                <label for="Taken_Time">Taken Time</label>
+                <input type="time" class="form-control" id="Taken_Time" name="taken_time" placeholder="Taken Time">
+            </div>
+            <div class="buttons">
+                <button type="submit" class="btn btn-primary mr-5">Add Customer</button>
+                <a href="/" class="btn btn-danger ml-5">Back</a>
+            </div>
+            <div id="google_translate_element" class="language mt-5"></div>
+                {% for message in messages %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+        </form>
+    </div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'te,en', // Add languages here
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</body>
+</html>

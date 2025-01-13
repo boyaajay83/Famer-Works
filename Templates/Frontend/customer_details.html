@@ -1,0 +1,153 @@
+{% load custom_filters %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <style>
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            font-size: 18px;
+            text-align: center;
+        }
+        .navbar {
+            background-color: #2bc2bd !important;
+            padding: 1rem;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 100;
+        }
+        .container {
+            padding-top: 50px;
+        }
+        .customer-card {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .customer-card strong {
+            color: #555;
+        }
+        .btn-action {
+            margin-top: 10px;
+        }
+        .box{
+            padding-top: 100px;
+        }
+        #google_translate_element {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Customer Portal</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="box">
+        <a href="/" class="btn btn-danger ml-5 ">Back</a>
+        <div id="google_translate_element" class="language mb-4"></div>
+    </div>
+    {%for item in customer%}
+    <div class="container">
+        <div class="column">
+          <div class="customer-card d-flex justify-content-center">
+              <div>
+                  <strong>Name:- </strong> {{item.Name}} <br>
+                  <strong>Father Name:- </strong> {{item.Father_Name}}<br>
+                  <strong>Phone:- </strong> {{item.Phonenumber}}<br>
+                  <strong>Quantity:- </strong> {{item.Quantity}}<br>
+                  <strong>Taken Date:- </strong> {{item.Taken_Date}}<br>
+                  <strong>Taken Time:- </strong> {{item.Taken_Time}}<br>
+                  <strong>Amount:- </strong> {{item.Amount}}<br>
+                  <strong>Given Amount:- </strong> {{item.Given_Amount}}<br>
+                  <strong>Balance:- </strong> {{item.Balance}}<br>
+                  <strong>status:- </strong>
+                  <span id="status"
+                      style="background-color: {{item.Status | toColor}};">
+                      {%if item.Status == True%}
+                          _______
+                      {%else%}
+                          _______
+                      {%endif%}
+                  </span>
+                  <div>
+                     <a href="money?phone={{item.Phonenumber}}&Taken_Date={{item.Taken_Date}}&Quantity={{item.Quantity}}" class="btn btn-primary mt-3 ">Edit Money</a>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    {%for sub_user_item_details in item.sub_customer_return_item_list%}
+        <i class="bi bi-arrow-down">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-down" viewBox="0 0 16 16">
+              <path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1"/>
+            </svg>
+        </i>
+        <div class="container">
+            <div class="column">
+                <div class="customer-card d-flex justify-content-center">
+                    <div>
+                        <strong>Name:- </strong> {{sub_user_item_details.Name}} <br>
+            <!--                <strong>Father Name:- </strong> {{sub_user_item_details.Father_Name}}-->
+            <!--                <strong>Phone:- </strong> {{sub_user_item_details.Phonenumber}}-->
+                        <strong>Quantity:- </strong> {{sub_user_item_details.Quantity}}<br>
+            <!--                <strong>Taken Date:- </strong> {{sub_user_item_details.Taken_Date}}-->
+            <!--                <strong>Taken Time:- </strong> {{sub_user_item_details.Taken_Time}}-->
+                        <strong>Return Date:- </strong> {{sub_user_item_details.Return_Date}}<br>
+                        <strong>Return Time:- </strong> {{sub_user_item_details.Return_Time}}<br>
+                        <strong>Amount:- </strong> {{sub_user_item_details.Amount}}<br>
+                        <strong>Amount Given:- </strong> {{sub_user_item_details.AmountGiven}}<br>
+                        <strong>Balance:- </strong> {{sub_user_item_details.Balance}}<br>
+                        <strong>Status:- </strong>
+                        <span id="statuss"
+                              style="background-color: {{sub_user_item_details.Status | toColor}};">
+                            {%if sub_user_item_details.Status == True%}
+                                _______
+                            {%else%}
+                                _______
+                            {%endif%}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {%endfor%}
+    <h1 style="color: white;">-------------------------------------------------</h1>
+    {%endfor%}
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'te,en', // Add languages here
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+</body>
+</html>
