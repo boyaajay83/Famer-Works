@@ -8,6 +8,9 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-2d(hjtho)8=y44@_4qa
 DEBUG = os.getenv('DJANGO_DEBUG', 'False') == 'True'
 ALLOWED_HOSTS = os.getenv('DJANGO_ALLOWED_HOSTS', '127.0.0.1,localhost').split(',')
 
+# Username for 'https://github.com': boyaajay83
+# Password for 'https://github.com': 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
+
 # Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
